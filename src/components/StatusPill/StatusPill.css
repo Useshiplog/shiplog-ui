@@ -1,0 +1,18 @@
+.status-pill {
+    font-weight: 600;
+    font-size: 14px;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.status-active {
+    color: #2da44e;
+    background: rgba(45, 164, 78, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .status-active {
+        color: #3fb950;
+        background: rgba(63, 185, 80, 0.15);
+    }
+}

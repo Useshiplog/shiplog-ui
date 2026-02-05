@@ -1,0 +1,134 @@
+#root {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: white;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1f2328;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links a {
+  margin-left: 1.5rem;
+  color: #57606a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #1f2328;
+}
+
+.nav-cta {
+  background: #1f2328;
+  color: white !important;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600 !important;
+}
+
+.nav-cta:hover {
+  background: #24292e;
+}
+
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #f6f8fa;
+}
+
+.home-hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  color: #1f2328;
+}
+
+.home-hero p {
+  font-size: 1.5rem;
+  color: #57606a;
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.cta-button {
+  background: #1f2328;
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.cta-button:hover {
+  background: #24292e;
+  transform: translateY(-2px);
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .main-nav {
+    background: #161b22;
+    border-bottom: 1px solid #30363d;
+  }
+
+  .nav-logo,
+  .home-hero h1 {
+    color: #c9d1d9;
+  }
+
+  .nav-links a,
+  .home-hero p {
+    color: #8b949e;
+  }
+
+  .home-hero {
+    background: #0d1117;
+  }
+
+  .cta-button {
+    background: #21262d;
+    border: 1px solid #30363d;
+  }
+
+  .cta-button:hover {
+    background: #30363d;
+  }
+}
