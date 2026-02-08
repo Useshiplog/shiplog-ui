@@ -1,0 +1,37 @@
+.jira-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background-color: #0052cc;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1), transform 0.1s;
+  gap: 10px;
+}
+
+.jira-btn:hover {
+  background-color: #0065ff;
+}
+
+.jira-btn:active {
+  background-color: #0047b3;
+  transform: translateY(1px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .jira-btn {
+    background-color: #1d7af3;
+    border: 1px solid #30363d;
+  }
+  
+  .jira-btn:hover {
+    background-color: #388bff;
+    border-color: #8b949e;
+  }
+}

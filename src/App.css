@@ -86,6 +86,12 @@
   max-width: 600px;
 }
 
+.hero-ctas {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
 .cta-button {
   background: #1f2328;
   color: white;
@@ -97,11 +103,20 @@
   transition: transform 0.2s, background 0.2s;
 }
 
+.jira-cta {
+  background: #0052cc;
+}
+
+.jira-cta:hover {
+  background: #0065ff;
+}
+
 .cta-button:hover {
   background: #24292e;
   transform: translateY(-2px);
   color: white;
 }
+
 
 @media (prefers-color-scheme: dark) {
   .main-nav {

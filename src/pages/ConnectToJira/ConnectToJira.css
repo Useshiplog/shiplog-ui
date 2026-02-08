@@ -1,0 +1,9 @@
+.jira-icon-container {
+    background: #0052cc !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .jira-icon-container {
+        background: #1d7af3 !important;
+    }
+}
