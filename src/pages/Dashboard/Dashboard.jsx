@@ -17,6 +17,8 @@ const Dashboard = () => {
                     credentials: 'include'
                 });
 
+                console.log('Response:', response);
+
                 if (response.status === 401) {
                     console.log('401 Unauthorized - Redirecting to login');
                     navigate('/login');
