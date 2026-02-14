@@ -1,14 +1,11 @@
-import React from 'react';
-import { getExternalId } from '../../features/auth/authService';
+import { redirectToOAuth } from '../../features/auth/oauthService';
 import './JiraButton.css';
 
 const JiraButton = ({ children = 'Connect with Jira', className = '' }) => {
     const handleConnect = () => {
-        const externalId = getExternalId();
-        const redirectUri = encodeURIComponent('https://nonconstructive-unquayed-carri.ngrok-free.dev/v1/jira/install/callback');
-        const authUrl = `https://auth.atlassian.com/authorize?audience=api.atlassian.com&client_id=pHAPkSqsqFXy8hCnPM4j6xkbIZOiVsse&scope=read%3Ajira-work%20manage%3Ajira-webhook&redirect_uri=${redirectUri}&state=${externalId || ''}&response_type=code&prompt=consent`;
-        window.location.href = authUrl;
+        redirectToOAuth('jira');
     };
+
 
     return (
         <button className={`jira-btn ${className}`} onClick={handleConnect}>

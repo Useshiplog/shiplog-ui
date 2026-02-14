@@ -1,0 +1,92 @@
+.configure-page {
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.page-header {
+    margin-bottom: 48px;
+}
+
+.page-header h1 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 24px;
+}
+
+.integration-card {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px !important;
+    margin-bottom: 16px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.integration-card:hover {
+    border-color: #d1d5db;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
+
+.integration-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.integration-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #f9fafb;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.integration-icon.github {
+    color: #111827;
+}
+
+.integration-icon.jira {
+    background-color: #ebf5ff;
+    /* Subtle blue for JIRA */
+}
+
+.integration-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.integration-name {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: #111827;
+}
+
+.integration-desc {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.integration-right {
+    flex-shrink: 0;
+}

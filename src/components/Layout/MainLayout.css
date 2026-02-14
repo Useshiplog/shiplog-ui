@@ -1,0 +1,27 @@
+.layout-shell {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f9fafb;
+}
+
+.main-content-area {
+    flex: 1;
+    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 0;
+    /* Prevents overflow-x in flexbox */
+}
+
+/* We need to adjust the margin of the content based on sidebar state */
+/* Since Sidebar is fixed, we offset the main content by the sidebar width */
+/* However, to make it truly responsive and easier to manage, we can also use padding/margin on the content area in App.jsx or here */
+
+.layout-shell:has(.sidebar.expanded) .main-content-area {
+    margin-left: 240px;
+}
+
+.layout-shell:has(.sidebar.collapsed) .main-content-area {
+    margin-left: 72px;
+}
+
+/* Fallback if :has is not supported or for clearer structure */
+/* We'll handle the dynamic margin in a more robust way if needed, but modern browsers support :has */

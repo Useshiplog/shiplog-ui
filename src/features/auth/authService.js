@@ -7,6 +7,7 @@ export const signup = async (email, password) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
     });
 
     const data = await response.json();
@@ -23,6 +24,7 @@ export const login = async (email, password) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
+        credentials: 'include',
     });
 
     const data = await response.json();
@@ -30,26 +32,10 @@ export const login = async (email, password) => {
         throw new Error(data.message || 'Login failed');
     }
 
-    if (data.token) {
-        localStorage.setItem('token', data.token);
-    }
-
-    if (data.data && data.data.external_id) {
-        localStorage.setItem('external_id', data.data.external_id);
-    }
-
     return data;
 };
 
 export const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('external_id');
+    // Session is managed via HttpOnly cookies by the backend
 };
 
-export const getToken = () => {
-    return localStorage.getItem('token');
-};
-
-export const getExternalId = () => {
-    return localStorage.getItem('external_id');
-};

@@ -9,10 +9,3 @@
     color: #2da44e;
     background: rgba(45, 164, 78, 0.1);
 }
-
-@media (prefers-color-scheme: dark) {
-    .status-active {
-        color: #3fb950;
-        background: rgba(63, 185, 80, 0.15);
-    }
-}

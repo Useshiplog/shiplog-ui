@@ -5,13 +5,3 @@
 .jira-success-icon {
     background: #0052cc !important;
 }
-
-@media (prefers-color-scheme: dark) {
-    .jira-success-container {
-        background: #0d1117 !important;
-    }
-
-    .jira-success-icon {
-        background: #1d7af3 !important;
-    }
-}

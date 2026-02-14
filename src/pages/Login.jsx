@@ -19,7 +19,7 @@ const Login = () => {
 
         try {
             await login(email, password);
-            navigate('/'); // Redirect to home or dashboard after login
+            navigate('/dashboard'); // Redirect to dashboard after login
         } catch (err) {
             setError(err.message || 'Invalid email or password.');
         } finally {

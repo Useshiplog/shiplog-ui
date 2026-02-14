@@ -40,19 +40,3 @@
     background: #24292e;
     transform: translateY(-2px);
 }
-
-@media (prefers-color-scheme: dark) {
-
-    .btn-primary,
-    .btn-dashboard {
-        background-color: #21262d;
-        border: 1px solid #30363d;
-        color: #c9d1d9;
-    }
-
-    .btn-primary:hover,
-    .btn-dashboard:hover {
-        background-color: #30363d;
-        border-color: #8b949e;
-    }
-}
