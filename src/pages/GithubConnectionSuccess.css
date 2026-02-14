@@ -156,30 +156,3 @@
     font-weight: 600;
     font-size: 14px;
 }
-
-@media (prefers-color-scheme: dark) {
-    .success-container {
-        background: #0d1117;
-    }
-
-    .success-card h1 {
-        color: #c9d1d9;
-    }
-
-    .success-card p {
-        color: #8b949e;
-    }
-
-    .details-box {
-        background: #0d1117;
-        border: 1px solid #30363d;
-    }
-
-    .detail-item .label {
-        color: #8b949e;
-    }
-
-    .detail-item .value {
-        color: #c9d1d9;
-    }
-}

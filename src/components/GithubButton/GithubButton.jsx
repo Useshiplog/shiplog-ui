@@ -1,13 +1,11 @@
-import React from 'react';
-import { getExternalId } from '../../features/auth/authService';
+import { redirectToOAuth } from '../../features/auth/oauthService';
 import './GithubButton.css';
 
 const GithubButton = ({ children = 'Connect with GitHub', className = '' }) => {
     const handleConnect = () => {
-        const externalId = getExternalId();
-        const baseUrl = 'https://github.com/apps/useshiplog/installations/new';
-        window.location.href = externalId ? `${baseUrl}?state=${externalId}` : baseUrl;
+        redirectToOAuth('github');
     };
+
 
     return (
         <button className={`github-btn ${className}`} onClick={handleConnect}>

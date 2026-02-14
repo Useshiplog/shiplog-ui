@@ -42,26 +42,3 @@
   color: #57606a;
   gap: 6px;
 }
-
-@media (prefers-color-scheme: dark) {
-  .connect-container {
-    background-color: #0d1117;
-  }
-
-  .connect-card h1 {
-    color: #c9d1d9;
-  }
-
-  .connect-card p {
-    color: #8b949e;
-  }
-
-  .icon-container {
-    background: #21262d;
-    border: 1px solid #30363d;
-  }
-
-  .secure-info {
-    color: #8b949e;
-  }
-}
