@@ -1,4 +1,4 @@
-export const API_URL = import.meta.env.VITE_API_URL;
+export const API_URL = "https://api.useshiplog.com"
 export const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
 export const GITHUB_AUTH_URL = import.meta.env.VITE_GITHUB_AUTH_URL;
 export const JIRA_CLIENT_ID = import.meta.env.VITE_JIRA_CLIENT_ID;
