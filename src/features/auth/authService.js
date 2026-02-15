@@ -1,7 +1,7 @@
-const API_URL = 'http://localhost:5001/v1/user';
+import { API_URL } from "../../constants/constants";
 
 export const signup = async (email, password) => {
-    const response = await fetch(`${API_URL}/create`, {
+    const response = await fetch(`${API_URL}/v1/user/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ export const signup = async (email, password) => {
 };
 
 export const login = async (email, password) => {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(`${API_URL}/v1/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
