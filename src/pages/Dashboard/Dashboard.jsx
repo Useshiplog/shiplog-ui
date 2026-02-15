@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReleaseCard from '../../components/ReleaseCard/ReleaseCard';
 import './Dashboard.css';
+import { API_URL } from '../../constants/constants';
 
 const Dashboard = () => {
     const [releases, setReleases] = useState([]);
@@ -12,8 +13,9 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchReleases = async () => {
+            console.log(API_URL)
             try {
-                const response = await fetch('http://localhost:5001/v1/releases', {
+                const response = await fetch(API_URL + '/v1/releases', {
                     credentials: 'include'
                 });
 

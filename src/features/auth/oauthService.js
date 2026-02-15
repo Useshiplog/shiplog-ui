@@ -1,8 +1,4 @@
-/**
- * OAuth Service for handling secure state generation and redirection
- */
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+import { API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_CALLBACK_URL } from "../../constants/constants";
 
 /**
  * Fetches a signed OAuth state token from the backend.
@@ -11,7 +7,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
  */
 export const getOAuthState = async (provider) => {
     try {
-        const response = await fetch(`${API_BASE_URL}/v1/auth/${provider}/state`, {
+        const response = await fetch(`${API_URL}/v1/auth/${provider}/state`, {
             method: 'GET',
             credentials: 'include',
         });
@@ -39,10 +35,7 @@ export const getOAuthState = async (provider) => {
     }
 };
 
-/**
- * Redirects the user to the provider's OAuth authorization page.
- * @param {'github' | 'jira'} provider 
- */
+
 export const redirectToOAuth = async (provider) => {
     try {
         console.log(`[OAuth] Initiating ${provider} redirection...`);
@@ -51,19 +44,19 @@ export const redirectToOAuth = async (provider) => {
         let authUrl = '';
 
         if (provider === 'github') {
-            const clientId = import.meta.env.VITE_GITHUB_CLIENT_ID;
-            const baseUrl = import.meta.env.VITE_GITHUB_AUTH_URL;
+            const clientId = GITHUB_CLIENT_ID;
+            const baseUrl = GITHUB_AUTH_URL;
             authUrl = `${baseUrl}?state=${state}`;
         } else if (provider === 'jira') {
-            const clientId = import.meta.env.VITE_JIRA_CLIENT_ID;
-            const baseUrl = import.meta.env.VITE_JIRA_AUTH_URL;
-            const redirectUri = encodeURIComponent(import.meta.env.VITE_JIRA_REDIRECT_URI);
+            const clientId = JIRA_CLIENT_ID;
+            const baseUrl = JIRA_AUTH_URL;
+            const redirectUri = encodeURIComponent(JIRA_REDIRECT_URI);
 
             const params = new URLSearchParams({
                 audience: 'api.atlassian.com',
                 client_id: clientId,
                 scope: 'read:jira-work manage:jira-webhook',
-                redirect_uri: import.meta.env.VITE_JIRA_REDIRECT_URI,
+                redirect_uri: JIRA_CALLBACK_URL,
                 state: state,
                 response_type: 'code',
                 prompt: 'consent'
