@@ -1,4 +1,4 @@
-import { API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_CALLBACK_URL } from "../../constants/constants";
+import { API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_AUTH_URL, JIRA_CALLBACK_URL, JIRA_CLIENT_ID } from "../../constants/constants";
 
 /**
  * Fetches a signed OAuth state token from the backend.
