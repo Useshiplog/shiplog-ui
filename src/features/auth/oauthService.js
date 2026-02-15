@@ -50,6 +50,10 @@ export const redirectToOAuth = async (provider) => {
         } else if (provider === 'jira') {
             const clientId = JIRA_CLIENT_ID;
             const baseUrl = JIRA_AUTH_URL;
+<<<<<<< HEAD
+=======
+            const redirectUri = encodeURIComponent(JIRA_REDIRECT_URI);
+>>>>>>> main
 
             const params = new URLSearchParams({
                 audience: 'api.atlassian.com',
