@@ -18,7 +18,7 @@ function App() {
         <Routes>
           {/* Public / Auth Routes (No Sidebar) */}
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/signup" element={<Signup />} />
+          {/* <Route path="/signup" element={<Signup />} /> */}
           <Route path="/login" element={<Login />} />
 
           {/* App Routes (With Sidebar) */}
@@ -34,10 +34,10 @@ function App() {
           } />
 
           {/* Legacy / Direct Connection Routes (Could also be wrapped if needed) */}
-          <Route path="/connect-to-github" element={<ConnectToGithub />} />
-          <Route path="/github-connection-success" element={<GithubConnectionSuccess />} />
-          <Route path="/connect-to-jira" element={<ConnectToJira />} />
-          <Route path="/jira-connection-success" element={<JiraConnectionSuccess />} />
+          {/* <Route path="/connect-to-github" element={<ConnectToGithub />} /> */}
+          {/* <Route path="/github-connection-success" element={<GithubConnectionSuccess />} /> */}
+          {/* <Route path="/connect-to-jira" element={<ConnectToJira />} /> */}
+          {/* <Route path="/jira-connection-success" element={<JiraConnectionSuccess />} /> */}
         </Routes>
       </div>
     </Router>
