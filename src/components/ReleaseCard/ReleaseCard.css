@@ -1,25 +1,23 @@
+/* Main Card */
 .release-card {
     background: #ffffff;
     border-radius: 12px;
     padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f1f1f1;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-.release-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-.card-header {
+/* Header */
+.card-header-row {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 24px;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
-.title-group {
+.header-left {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -27,144 +25,319 @@
 
 .release-title {
     font-size: 1.25rem;
-    font-weight: 600;
-    color: #1a1a1a;
+    font-weight: 700;
+    color: #111827;
     margin: 0;
 }
 
-.release-version {
-    color: #8c8c8c;
-    font-size: 0.95rem;
-}
-
-.status-badge {
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    background: #f0fdf4 !important;
-    color: #166534 !important;
-    border: 1px solid #dcfce7 !important;
-    border-radius: 6px;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 12px;
-}
-
-.type-btn {
-    padding: 6px 16px;
-    border-radius: 8px;
-    font-weight: 500;
-    font-size: 0.875rem;
-    border: 1px solid transparent;
-    cursor: pointer;
-}
-
-.type-sell {
-    background: #f0fdf4;
+.status-badge-released {
+    background-color: #dcfce7;
     color: #166534;
-    border-color: #dcfce7;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
 }
 
-.type-pilot {
-    background: #eff6ff;
-    color: #1e40af;
-    border-color: #dbeafe;
-}
-
-.type-hold {
-    background: #fff7ed;
-    color: #9a3412;
-    border-color: #ffedd5;
-}
-
-.ask-btn {
-    background: #5c6bc0;
+.ask-btn-top {
+    background-color: #4f46e5;
     color: white;
     border: none;
     padding: 8px 16px;
-    border-radius: 8px;
-    font-weight: 500;
+    border-radius: 6px;
     font-size: 0.875rem;
+    font-weight: 500;
     cursor: pointer;
-    transition: background 0.2s ease;
-}
-
-.ask-btn:hover {
-    background: #3f51b5;
-}
-
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-}
-
-.grid-item label {
-    display: block;
-    color: #8c8c8c;
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-}
-
-.impact-value {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #1a1a1a;
-}
-
-.impact-sub {
-    font-size: 0.8rem;
-    color: #8c8c8c;
-}
-
-.risk-value {
     display: flex;
     align-items: center;
     gap: 6px;
-    font-size: 0.95rem;
-    font-weight: 500;
+    transition: background-color 0.2s;
 }
 
-.risk-none {
-    color: #166534;
+.ask-btn-top:hover {
+    background-color: #4338ca;
 }
 
-.risk-known {
-    color: #9a3412;
-}
-
-.risk-icon {
+.ask-icon {
     font-size: 1rem;
 }
 
-.user-info {
+/* Meta */
+.release-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+}
+
+.meta-icon {
+    color: #9ca3af;
+}
+
+.meta-separator {
+    color: #d1d5db;
+}
+
+.small-id {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #9ca3af;
+}
+
+/* Content Sections */
+.section-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 8px 0;
+}
+
+.content-section {
+    margin-bottom: 24px;
+}
+
+.summary-text {
+    font-size: 1rem;
+    color: #1f2937;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.signals-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.signal-group {
+    /* Group container */
+}
+
+.signal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Signal Cards (Jira & Github) */
+.signal-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #f9fafb;
+    /* Slightly grey bg for signal connection */
+    transition: all 0.2s;
+}
+
+.signal-card:hover {
+    border-color: #d1d5db;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    /* Only hover state gets shadow in mockup? Or maybe always white. Using slight distinction. */
+}
+
+/* Jira Specifics */
+.jira-card {
+    background-color: #ffffff;
+    /* Mockup shows white */
+}
+
+.platform-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    color: #5E6C84;
+}
+
+.jira-icon {
+    color: #0052cc;
+}
+
+.github-icon {
+    color: #24292f;
+}
+
+/* Signal Header */
+.signal-header {
+    /* */
+}
+
+.signal-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.jira-id-group {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
-.user-icon {
-    width: 28px;
-    height: 28px;
-    background: #f3f4f6;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
+.signal-key {
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 0.95rem;
 }
 
-.user-name {
+.signal-key:hover {
+    text-decoration: underline;
+}
+
+.signal-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    color: #374151;
+    font-weight: 500;
+}
+
+.type-badge {
+    /* e.g., Story */
+}
+
+.status-badge-jira {
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+.signal-summary {
+    font-size: 1rem;
+    color: #1f2937;
+    margin-bottom: 12px;
+    margin-left: 24px;
+    /* Indent under icon? Mockup aligns left. */
+    margin-left: 0;
+}
+
+/* Expand Button */
+.expand-btn {
+    background: none;
+    border: none;
+    color: #2563eb;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #1a1a1a;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
-.user-location {
+.expand-btn:hover {
+    text-decoration: underline;
+}
+
+/* Signal Details (Expanded) */
+.signal-details {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f3f4f6;
+}
+
+.detail-section {
+    margin-bottom: 16px;
+}
+
+.detail-section label,
+.detail-item label,
+.comments-section label {
+    display: block;
     font-size: 0.75rem;
-    color: #8c8c8c;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.detail-text {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 16px;
+}
+
+.user-field {
+    font-size: 0.95rem;
+    color: #111827;
+}
+
+/* Comments */
+.comments-section {
+    margin-top: 16px;
+}
+
+.comment-item {
+    background-color: #f9fafb;
+    border: 1px solid #f3f4f6;
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 4px;
+}
+
+.comment-body {
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+/* Github Card specifics */
+.github-card {
+    background-color: #f9fafb;
+    /* Greyish for PRs? Mockup shows just a simple bar */
+    border: 1px solid #e5e7eb;
+}
+
+.signal-header-simple {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.gh-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.signal-summary-gh {
+    font-weight: 600;
+    color: #1f2937;
+    font-size: 0.95rem;
+}
+
+.signal-id {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.signal-body-preview {
+    font-size: 0.9rem;
+    color: #4b5563;
+    margin-left: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
