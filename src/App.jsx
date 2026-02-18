@@ -33,9 +33,15 @@ function App() {
               <ConfigureShiplog />
             </MainLayout>
           } />
-          <Route path="/chat" element={
+          <Route path="/chat" element={<Navigate to="/chat/global" replace />} />
+          <Route path="/chat/global" element={
             <MainLayout>
-              <Chat />
+              <Chat mode="global" />
+            </MainLayout>
+          } />
+          <Route path="/chat/release/:releaseId" element={
+            <MainLayout>
+              <Chat mode="release" />
             </MainLayout>
           } />
 

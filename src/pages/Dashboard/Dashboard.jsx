@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import ReleaseCard from '../../components/ReleaseCard/ReleaseCard';
 import './Dashboard.css';
-import { API_URL } from '../../constants/constants';
+import { SYSTEM1_API_URL } from '../../constants/constants';
 
 const Dashboard = () => {
     const [releases, setReleases] = useState([]);
@@ -13,8 +13,14 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchReleases = async () => {
+            if (!SYSTEM1_API_URL) {
+                setError('System 1 API URL is not configured. Please set VITE_SYSTEM1_API_URL environment variable.');
+                setLoading(false);
+                return;
+            }
+
             try {
-                const response = await fetch(API_URL + '/v1/releases', {
+                const response = await fetch(`${SYSTEM1_API_URL}/v1/releases`, {
                     credentials: 'include'
                 });
 

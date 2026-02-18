@@ -1,34 +1,72 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { sendMessage, getSessions } from '../../features/chat/chatService';
+import { useParams } from 'react-router-dom';
+import { sendMessage, getSessions, getMessages } from '../../features/chat/chatService';
 import './Chat.css';
 
-const Chat = () => {
-    const [searchParams] = useSearchParams();
-    const mode = searchParams.get('mode') || 'global';
-    const release_id = searchParams.get('release_id');
+const Chat = ({ mode = 'global' }) => {
+    const { releaseId } = useParams();
 
     const [sessions, setSessions] = useState([]);
     const [activeSessionId, setActiveSessionId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [inputText, setInputText] = useState('');
     const [loading, setLoading] = useState(false);
+    const [loadingMessages, setLoadingMessages] = useState(false);
     const [error, setError] = useState(null);
 
-    // Fetch sessions on load (only for global mode)
+    // Fetch sessions on load and set active session
     useEffect(() => {
-        if (mode === 'global') {
-            const fetchSessions = async () => {
-                try {
-                    const sessionsData = await getSessions();
-                    setSessions(sessionsData || []);
-                } catch (err) {
-                    setError(err.message || 'Failed to load sessions');
+        const fetchSessions = async () => {
+            try {
+                const sessionsData = await getSessions();
+                setSessions(sessionsData || []);
+
+                if (mode === 'global') {
+                    // Load latest global session
+                    const globalSessions = sessionsData?.filter(s => s.mode === 'global') || [];
+                    if (globalSessions.length > 0) {
+                        // Get the most recent session (assuming sessions are sorted by creation time)
+                        const latestSession = globalSessions[0];
+                        setActiveSessionId(latestSession.session_id || latestSession.id);
+                    }
+                } else if (mode === 'release' && releaseId) {
+                    // Find and set active release session
+                    const releaseSession = sessionsData?.find(
+                        session => session.mode === 'release' && session.release_id === releaseId
+                    );
+                    if (releaseSession) {
+                        setActiveSessionId(releaseSession.session_id || releaseSession.id);
+                    }
                 }
-            };
-            fetchSessions();
+            } catch (err) {
+                setError(err.message || 'Failed to load sessions');
+            }
+        };
+        fetchSessions();
+    }, [mode, releaseId]);
+
+    // Fetch messages when activeSessionId changes
+    useEffect(() => {
+        if (!activeSessionId) {
+            setMessages([]);
+            return;
         }
-    }, [mode]);
+
+        const fetchMessages = async () => {
+            setLoadingMessages(true);
+            try {
+                const messagesData = await getMessages(activeSessionId);
+                setMessages(messagesData || []);
+            } catch (err) {
+                setError(err.message || 'Failed to load messages');
+                setMessages([]);
+            } finally {
+                setLoadingMessages(false);
+            }
+        };
+
+        fetchMessages();
+    }, [activeSessionId]);
 
     const handleNewChat = () => {
         setActiveSessionId(null);
@@ -38,8 +76,8 @@ const Chat = () => {
 
     const handleSessionClick = (sessionId) => {
         setActiveSessionId(sessionId);
-        setMessages([]);
         setError(null);
+        // Messages will be loaded by useEffect when activeSessionId changes
     };
 
     const handleSendMessage = async (e) => {
@@ -57,8 +95,8 @@ const Chat = () => {
 
         try {
             const response = await sendMessage({
-                mode: 'global',
-                release_id: null,
+                mode: mode,
+                release_id: mode === 'release' ? releaseId : null,
                 session_id: activeSessionId,
                 message: userMessage,
             });
@@ -66,18 +104,23 @@ const Chat = () => {
             // If this was a new session, update activeSessionId and refetch sessions
             if (!activeSessionId && response.session_id) {
                 setActiveSessionId(response.session_id);
-                // Refetch sessions to update sidebar
-                try {
-                    const sessionsData = await getSessions();
-                    setSessions(sessionsData || []);
-                } catch (err) {
-                    // Non-critical error, just log it
-                    console.error('Failed to refetch sessions:', err);
+                // Refetch sessions to update sidebar (only for global mode)
+                if (mode === 'global') {
+                    try {
+                        const sessionsData = await getSessions();
+                        setSessions(sessionsData || []);
+                    } catch (err) {
+                        // Non-critical error, just log it
+                        console.error('Failed to refetch sessions:', err);
+                    }
                 }
             }
 
-            // Add assistant response
-            const assistantMsg = { role: 'assistant', content: response.message || response.content || 'Response received' };
+            // Add assistant response using real API response
+            const assistantMsg = { 
+                role: 'assistant', 
+                content: response.answer || response.message || response.content || 'Response received' 
+            };
             setMessages(prev => [...prev, assistantMsg]);
         } catch (err) {
             setError(err.message || 'Failed to send message');
@@ -116,17 +159,20 @@ const Chat = () => {
             <div className="chatMain">
                 <div className="chatHeader">
                     {mode === "release"
-                        ? `Release: ${release_id}`
+                        ? (
+                            <>
+                                <div>Release Chat</div>
+                                <div className="chatHeaderReleaseId">{releaseId}</div>
+                            </>
+                        )
                         : "Global Chat"}
                 </div>
 
                 <div className="chatMessages">
-                    {messages.length === 0 ? (
-                        <div className="emptyState">
-                            {activeSessionId
-                                ? "Session loaded. Conversation history will appear soon."
-                                : "Start a conversation…"}
-                        </div>
+                    {loadingMessages ? (
+                        <div className="emptyState">Loading messages...</div>
+                    ) : messages.length === 0 ? (
+                        <div className="emptyState">Start a conversation…</div>
                     ) : (
                         <div className="messagesList">
                             {messages.map((msg, idx) => (

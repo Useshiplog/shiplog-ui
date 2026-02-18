@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import JiraSignalCard from './JiraSignalCard';
@@ -6,6 +7,7 @@ import GithubSignalCard from './GithubSignalCard';
 import './ReleaseCard.css';
 
 const ReleaseCard = ({ release }) => {
+    const navigate = useNavigate();
     const {
         release_signal_lts_version,
         external_id,
@@ -23,6 +25,13 @@ const ReleaseCard = ({ release }) => {
     // Placeholder title logic until we have real project names
     const releaseTitle = "CPQ";
 
+    const handleAskQuestion = () => {
+        // Use external_id as releaseId for navigation
+        if (external_id) {
+            navigate(`/chat/release/${external_id}`);
+        }
+    };
+
     return (
         <div className="release-card">
             <div className="card-header-row">
@@ -31,7 +40,7 @@ const ReleaseCard = ({ release }) => {
                     <span className="status-badge-released">Released</span>
                 </div>
                 <div className="header-right">
-                    <button className="ask-btn-top">
+                    <button className="ask-btn-top" onClick={handleAskQuestion}>
                         <span className="ask-icon">💬</span> Ask a Question
                     </button>
                 </div>

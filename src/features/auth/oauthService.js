@@ -1,4 +1,4 @@
-import { API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_AUTH_URL, JIRA_CALLBACK_URL, JIRA_CLIENT_ID } from "../../constants/constants";
+import { SYSTEM1_API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_AUTH_URL, JIRA_CALLBACK_URL, JIRA_CLIENT_ID } from "../../constants/constants";
 
 /**
  * Fetches a signed OAuth state token from the backend.
@@ -6,8 +6,12 @@ import { API_URL, GITHUB_AUTH_URL, GITHUB_CLIENT_ID, JIRA_AUTH_URL, JIRA_CALLBAC
  * @returns {Promise<string>} The signed state JWT
  */
 export const getOAuthState = async (provider) => {
+    if (!SYSTEM1_API_URL) {
+        throw new Error('System 1 API URL is not configured. Please set VITE_SYSTEM1_API_URL environment variable.');
+    }
+
     try {
-        const response = await fetch(`${API_URL}/v1/auth/${provider}/state`, {
+        const response = await fetch(`${SYSTEM1_API_URL}/v1/auth/${provider}/state`, {
             method: 'GET',
             credentials: 'include',
         });

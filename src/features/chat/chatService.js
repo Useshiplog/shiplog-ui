@@ -1,4 +1,4 @@
-import { API_URL } from "../../constants/constants";
+import { SYSTEM2_API_URL } from "../../constants/constants";
 
 export async function sendMessage({
     mode,
@@ -6,11 +6,11 @@ export async function sendMessage({
     session_id = null,
     message,
 }) {
-    if (!API_URL) {
-        throw new Error('API URL is not configured. Please set VITE_API_URL environment variable.');
+    if (!SYSTEM2_API_URL) {
+        throw new Error('System 2 API URL is not configured. Please set VITE_SYSTEM2_API_URL environment variable.');
     }
 
-    const response = await fetch(`${API_URL}/v1/chat`, {
+    const response = await fetch(`${SYSTEM2_API_URL}/v1/chat`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -38,11 +38,11 @@ export async function sendMessage({
 }
 
 export async function getSessions() {
-    if (!API_URL) {
-        throw new Error('API URL is not configured. Please set VITE_API_URL environment variable.');
+    if (!SYSTEM2_API_URL) {
+        throw new Error('System 2 API URL is not configured. Please set VITE_SYSTEM2_API_URL environment variable.');
     }
 
-    const response = await fetch(`${API_URL}/v1/chat/sessions`, {
+    const response = await fetch(`${SYSTEM2_API_URL}/v1/chat/sessions`, {
         method: 'GET',
         credentials: 'include',
     });
@@ -58,4 +58,31 @@ export async function getSessions() {
         throw new Error(data.message || `Failed to fetch sessions: ${response.status} ${response.statusText}`);
     }
     return data.sessions;
+}
+
+export async function getMessages(sessionId) {
+    if (!SYSTEM2_API_URL) {
+        throw new Error('System 2 API URL is not configured. Please set VITE_SYSTEM2_API_URL environment variable.');
+    }
+
+    if (!sessionId) {
+        throw new Error('Session ID is required to fetch messages.');
+    }
+
+    const response = await fetch(`${SYSTEM2_API_URL}/v1/chat/${sessionId}/messages`, {
+        method: 'GET',
+        credentials: 'include',
+    });
+
+    let data;
+    try {
+        data = await response.json();
+    } catch (error) {
+        throw new Error(`Failed to parse response: ${response.status} ${response.statusText}`);
+    }
+
+    if (!response.ok) {
+        throw new Error(data.message || `Failed to fetch messages: ${response.status} ${response.statusText}`);
+    }
+    return data.messages || [];
 }
