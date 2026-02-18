@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../../components/Card/Card';
 import Button from '../../components/Button/Button';
 import { redirectToOAuth } from '../../features/auth/oauthService';
-import { API_URL } from '../../constants/constants';
+import { SYSTEM1_API_URL } from '../../constants/constants';
 import './ConfigureShiplog.css';
 
 const ConfigureShiplog = () => {
@@ -13,8 +13,14 @@ const ConfigureShiplog = () => {
 
     useEffect(() => {
         const fetchStatus = async () => {
+            if (!SYSTEM1_API_URL) {
+                console.error('System 1 API URL is not configured. Please set VITE_SYSTEM1_API_URL environment variable.');
+                setLoading(false);
+                return;
+            }
+
             try {
-                const response = await fetch(`${API_URL}/v1/integrations/status`, {
+                const response = await fetch(`${SYSTEM1_API_URL}/v1/integrations/status`, {
                     credentials: 'include',
                 });
 

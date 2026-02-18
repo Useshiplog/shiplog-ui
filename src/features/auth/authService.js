@@ -1,7 +1,11 @@
-import { API_URL } from "../../constants/constants";
+import { SYSTEM1_API_URL } from "../../constants/constants";
 
 export const signup = async (email, password) => {
-    const response = await fetch(`${API_URL}/v1/user/create`, {
+    if (!SYSTEM1_API_URL) {
+        throw new Error('System 1 API URL is not configured. Please set VITE_SYSTEM1_API_URL environment variable.');
+    }
+
+    const response = await fetch(`${SYSTEM1_API_URL}/v1/user/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -18,7 +22,11 @@ export const signup = async (email, password) => {
 };
 
 export const login = async (email, password) => {
-    const response = await fetch(`${API_URL}/v1/user/login`, {
+    if (!SYSTEM1_API_URL) {
+        throw new Error('System 1 API URL is not configured. Please set VITE_SYSTEM1_API_URL environment variable.');
+    }
+
+    const response = await fetch(`${SYSTEM1_API_URL}/v1/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

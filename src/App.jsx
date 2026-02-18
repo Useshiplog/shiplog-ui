@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import ConfigureShiplog from './pages/ConfigureShiplog/ConfigureShiplog';
+import Chat from './pages/Chat/Chat';
 import MainLayout from './components/Layout/MainLayout';
 import './App.css';
 
@@ -30,6 +31,17 @@ function App() {
           <Route path="/configure" element={
             <MainLayout>
               <ConfigureShiplog />
+            </MainLayout>
+          } />
+          <Route path="/chat" element={<Navigate to="/chat/global" replace />} />
+          <Route path="/chat/global" element={
+            <MainLayout>
+              <Chat mode="global" />
+            </MainLayout>
+          } />
+          <Route path="/chat/release/:releaseId" element={
+            <MainLayout>
+              <Chat mode="release" />
             </MainLayout>
           } />
 

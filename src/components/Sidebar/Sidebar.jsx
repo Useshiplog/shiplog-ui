@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = () => {
     const [isCollapsed, setIsCollapsed] = useState(false);
+    const location = useLocation();
 
     const toggleSidebar = () => {
         setIsCollapsed(!isCollapsed);
@@ -19,6 +20,15 @@ const Sidebar = () => {
                     <rect x="14" y="3" width="7" height="7"></rect>
                     <rect x="14" y="14" width="7" height="7"></rect>
                     <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+            )
+        },
+        {
+            path: '/chat/global',
+            label: 'Ask Shiplog AI',
+            icon: (
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                 </svg>
             )
         },
@@ -50,17 +60,27 @@ const Sidebar = () => {
             </div>
 
             <nav className="sidebar-nav">
-                {navItems.map((item) => (
-                    <NavLink
-                        key={item.path}
-                        to={item.path}
-                        className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
-                        title={isCollapsed ? item.label : ''}
-                    >
-                        <span className="nav-icon">{item.icon}</span>
-                        {!isCollapsed && <span className="nav-label">{item.label}</span>}
-                    </NavLink>
-                ))}
+                {navItems.map((item) => {
+                    // For "Ask Shiplog AI", make it active on any chat route
+                    const isChatRoute = item.path === '/chat/global' && location.pathname.startsWith('/chat');
+                    
+                    return (
+                        <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) => {
+                                if (item.path === '/chat/global') {
+                                    return `nav-item ${isChatRoute ? 'active' : ''}`;
+                                }
+                                return `nav-item ${isActive ? 'active' : ''}`;
+                            }}
+                            title={isCollapsed ? item.label : ''}
+                        >
+                            <span className="nav-icon">{item.icon}</span>
+                            {!isCollapsed && <span className="nav-label">{item.label}</span>}
+                        </NavLink>
+                    );
+                })}
             </nav>
 
             <div className="sidebar-footer">
