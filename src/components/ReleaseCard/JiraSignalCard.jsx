@@ -1,22 +1,27 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, MessageSquare, User, GitBranch } from 'lucide-react';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const JiraSignalCard = ({ signal }) => {
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const { raw_payload, key } = signal;
     const issue = raw_payload?.jira?.issue || {};
     const fields = issue.fields || {};
     const { summary, description, issuetype, status, assignee, reporter, comments } = fields;
 
+    const toggleExpand = (e) => {
+        e.stopPropagation();
+        setIsExpanded(!isExpanded);
+    };
+
     return (
-        <div className="signal-card jira-card">
+        <div className={`signal-card jira-card ${isExpanded ? 'is-expanded' : ''}`} onClick={toggleExpand}>
             <div className="signal-header">
                 <div className="signal-title-row">
                     <div className="jira-id-group">
                         <span className="platform-icon jira-icon">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M11.53 2c0-1.1 0.9-2 2-2h8.47c1.1 0 2 0.9 2 2v20c0 1.1-0.9 2-2 2H13.53c-1.1 0-2-0.9-2-2V2zM6.76 6.84c0-1.1 0.9-2 2-2h3.53c1.1 0 2 0.9 2 2v15.16c0 1.1-0.9 2-2 2H8.76c-1.1 0-2-0.9-2-2V6.84zM2 11.68c0-1.1 0.9-2 2-2h3.53c1.1 0 2 0.9 2 2v10.32c0 1.1-0.9 2-2 2H4c-1.1 0-2-0.9-2-2V11.68z" fill="#0052cc" /></svg>
                         </span>
-                        <a href={`#`} className="signal-key">{key}</a>
+                        <span className="signal-key">{key}</span>
                         {issuetype && <span className="signal-badge type-badge">{issuetype.name}</span>}
                         {status && <span className="signal-badge status-badge-jira">{status.name}</span>}
                     </div>
@@ -24,19 +29,16 @@ const JiraSignalCard = ({ signal }) => {
 
                 <div className="signal-summary">{summary}</div>
 
-                <button
-                    className="expand-btn"
-                    onClick={() => setIsExpanded(!isExpanded)}
-                >
+                <div className="expand-btn">
                     {isExpanded ?
                         <span className="expand-text">Show less <ChevronUp size={14} /></span> :
                         <span className="expand-text">Show details <ChevronDown size={14} /></span>
                     }
-                </button>
+                </div>
             </div>
 
             {isExpanded && (
-                <div className="signal-details">
+                <div className="signal-details" onClick={(e) => e.stopPropagation()}>
                     {description && (
                         <div className="detail-section">
                             <label>Description</label>
