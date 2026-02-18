@@ -4,7 +4,7 @@ export const SYSTEM1_API_URL = "http://localhost:8000";
 // System 2 API URL - AI backend (Chat, Query, Documents)
 // Uses proxy route to enable cookie forwarding in development
 // export const SYSTEM2_API_URL = '/api/system2';
-export const SYSTEM2_API_URL = "http://localhost:8001";
+export const SYSTEM2_API_URL = "http://localhost:8000";
 
 // Legacy constants for backward compatibility (will be removed after migration)
 export const API_URL = "https://api.useshiplog.com"
